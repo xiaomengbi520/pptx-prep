@@ -133,7 +133,7 @@ pptx-prep/
 不能。它只做材料预检。生成交给下游 PPTX 工具（pptx skill、python-pptx、PptxGenJS 等）。
 
 **Q: 我不想用 Claude Code，能在 ChatGPT 上用吗？**
-可以。复制 `prompts/universal.md` 的内容粘贴到 ChatGPT 对话开头，同样的效果。
+可以。复制 `prompts/universal.md` 的内容粘贴到 ChatGPT 对话开头，同样的效果
 
 **Q: 一定要提供所有材料吗？**
 不。缺失的照片选 A（AI 搜索）或 C（占位符）。缺失的文字 AI 自动生成，标记 `needs-review`。

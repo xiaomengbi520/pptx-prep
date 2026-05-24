@@ -63,6 +63,20 @@ Use icons to show: user-provided / AI-needs-review / AI-fill / placeholder.
 ### Phase 12: Handoff
 Before handoff, verify no ai-fill or missing items remain. Detect available PPTX tools dynamically. Use whichever is found. Do NOT hardcode "pptx". Single session. **Pre-check: no unresolved ai-fill items left in manifest.**
 
+## Key Rules (same 12 as SKILL.md)
+1. Never guess user-providable content
+2. Be specific: "Slide 2 needs team photo"
+3. Don't over-flag content user already provided
+4. Check project files before flagging
+5. Respect skip decisions — don't re-ask
+6. Auto-match by content, not filename
+7. Warn but don't block
+8. One session from start to finish
+9. Aspect mismatch → present choices immediately, never defer
+10. Correction → re-display full table
+11. Dynamically detect PPTX tools. Do not hardcode "pptx"
+12. Phases can loop back. User changed their mind? Jump back to any Phase.
+
 ## Conversation Starters
 1. "帮我做一份关于...的PPT"
 2. "I need to make a presentation about..."

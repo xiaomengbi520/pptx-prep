@@ -30,12 +30,12 @@ Output format:
 ...
 ```
 
-5 Categories:
-- **Category 1: Personal/Identity** — names, roles, dates, contact info (关键词: 团队、成员、姓名、职位、日期)
-- **Category 2: Visual Assets** — photos, logos, screenshots (关键词: 照片、Logo、截图、头像)
-- **Category 3: Data/Statistics** — revenue, metrics, survey results (关键词: 收入、数据、指标、统计)
-- **Category 4: Custom Content/Branding** — slogans, brand colors, quotes (关键词: 口号、品牌色、愿景、引用)
-- **Category 5: External References** — URLs, PDFs, templates (关键词: 内网、参考文档、模板)
+5 Categories (bilingual keyword matching):
+- **Category 1: Personal/Identity** — names, roles, dates, contact info (CN: 团队/成员/姓名/职位/日期 EN: team/member/name/role/date)
+- **Category 2: Visual Assets** — photos, logos, screenshots (CN: 照片/Logo/截图/头像 EN: photo/logo/screenshot/icon/portrait)
+- **Category 3: Data/Statistics** — revenue, metrics, survey results (CN: 收入/数据/指标/统计 EN: revenue/data/metric/growth)
+- **Category 4: Custom Content/Branding** — slogans, brand colors, quotes (CN: 口号/品牌色/愿景/引用 EN: slogan/brand/color/mission/quote)
+- **Category 5: External References** — URLs, PDFs, templates (CN: 内网/参考文档/模板 EN: url/link/reference/template/wiki)
 
 ### Phase 3: 缺失阈值判断
 If ❌ 需补充 > 50% of total materials → warn user, offer to proceed anyway. If ≤ 50%, continue.
@@ -83,5 +83,7 @@ Before handoff, verify: no ai-fill items remain (all resolved in Phase 9), no mi
 6. Auto-match files by content, not name.
 7. Warn but don't block — always give the option to continue.
 8. One session from start to finish.
-9. When aspect ratio mismatch is found, present A/B/C immediately.
+9. When aspect ratio mismatch is found, present A/B/C immediately. Never defer.
 10. After user corrects a match, re-display the full corrected table.
+11. Dynamically detect available PPTX generation tools. Do not hardcode "pptx".
+12. Phases can loop back. User changed their mind? Jump back to any Phase. Numbers don't lock the path.

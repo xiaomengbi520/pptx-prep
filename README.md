@@ -43,9 +43,13 @@ pptx-prep **在生成之前**扫描需求 → 列出你缺什么 → 你一次�
 ### Claude Code (推荐)
 
 ```bash
-# 安装到 Claude Code 全局 skills 目录
+# macOS / Linux
 git clone https://github.com/xiaomengbi520/pptx-prep.git
 cp -r pptx-prep ~/.claude/skills/pptx-prep
+
+# Windows (PowerShell)
+git clone https://github.com/xiaomengbi520/pptx-prep.git
+Copy-Item -Recurse pptx-prep "$env:USERPROFILE\.claude\skills\pptx-prep"
 ```
 
 然后在新会话中说 "帮我做一份XX PPT"，pptx-prep 自动激活。

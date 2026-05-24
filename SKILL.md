@@ -1,5 +1,6 @@
 ---
 name: pptx-prep
+version: "1.0"
 description: "PPTX 材料预检 — 在任何 PPTX 生成之前必须先运行。分析需求，识别人类依赖材料（姓名、照片、Logo、数据），收集材料或确认跳过，消除返工。Materials pre-check before any PPTX generation. ALWAYS run FIRST. Collect names, photos, logos, data upfront."
 ---
 
@@ -14,6 +15,8 @@ Run this skill **before** any PPTX generation. The goal: stop AI from inventing 
 ---
 
 ## Workflow
+
+**Phases 是编号的，但对话不是线性的。** 用户在 Phase 8 时突然想改 Phase 1 的结构？直接跳回去。Phase 9 选了占位符后来找到了材料？回到 Phase 5。Phase 5 匹配错了想重来？回到 Phase 5。编号只是让你知道哪一步做什么，不是锁死路径。
 
 ### Phase 1: 确认幻灯片结构
 
@@ -62,19 +65,24 @@ Run this skill **before** any PPTX generation. The goal: stop AI from inventing 
 #### 5 大类检查依据
 
 **类别 1：个人信息** — 姓名、职位、日期、联系方式
-关键词: 团队介绍、成员、负责人、姓名、职位、联系方式、日期
+CN: 团队介绍、成员、负责人、姓名、职位、联系方式、日期
+EN: team, member, name, role, title, contact, date, presenter, author, position
 
 **类别 2：视觉素材** — 照片、Logo、截图、图标
-关键词: 照片、Logo、截图、头像、图标、海报
+CN: 照片、Logo、截图、头像、图标、海报
+EN: photo, logo, screenshot, icon, avatar, image, headshot, portrait, graphic, poster
 
 **类别 3：数据统计** — 收入、指标、调研结果、规格
-关键词: 收入、数据、指标、增长、统计、营收
+CN: 收入、数据、指标、增长、统计、营收
+EN: revenue, data, metric, growth, statistic, survey, number, figure, percentage, budget
 
 **类别 4：定制品牌** — 口号、品牌色、引用、术语
-关键词: 口号、品牌色、愿景、标语、引用
+CN: 口号、品牌色、愿景、标语、引用
+EN: slogan, brand, color, mission, vision, tagline, quote, font, terminology, acronym
 
 **类别 5：外部引用** — 内网链接、参考文档、模板
-关键词: 内网、参考文档、模板、链接、以往PPT
+CN: 内网、参考文档、模板、链接、以往PPT
+EN: url, link, reference, template, document, wiki, internal, guide, style-guide, previous
 
 ### Phase 3: 缺失阈值判断
 
@@ -220,17 +228,16 @@ summary:
 ```
 ## 材料检查完成
 
-### ✅ 你提供的 (3)：
-- 封面照   ← materials/photo.jpg (Slide 1)
-- 公司Logo ← materials/logo.png (Slide 1)
-- Q2收入   ← materials/数据.xlsx (Slide 4)
+### ✅ 材料就绪 (5)：
+- 封面照   ← materials/photo.jpg (Slide 1) — 你提供
+- 公司Logo ← materials/logo.png (Slide 1) — 你提供
+- Q2收入   ← materials/数据.xlsx (Slide 4) — 你提供
+- 获奖照片 ← materials/award.jpg (Slide 7) — AI 搜索
+- 团队照   ← materials/team.png (Slide 3) — AI 生成
 
 ### 🤖 AI 生成，请审核 (2)：
 - 公司简介 (Slide 2) — AI 撰写，请核实数据准确性
 - 里程碑描述 (Slide 3) — AI 编写了时间线文字
-
-### 🔍 AI 将自动填充 (1)：
-- 获奖照片 (Slide 7) — 用户选择让 AI 搜索
 
 ### 📌 占位符 (0)：
 - 无
@@ -270,6 +277,7 @@ summary:
 9. **Phase 6 即时选项。** 检出宽高比不匹配时，立刻给 A/B/C，不延后。
 10. **纠正后重列。** 用户调整匹配后，重新输出完整对照表，不只回一句。
 11. **动态发现下游工具。** 不硬编码 "pptx"，检测实际可用的生成 skill。
+12. **Phase 之间可跳回。** 用户改主意了？回到对应 Phase 重新执行。编号不锁死路径。
 
 ---
 

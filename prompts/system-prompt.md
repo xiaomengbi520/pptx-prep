@@ -43,11 +43,17 @@ BEFORE generating any presentation, you MUST run this protocol:
     Use whatever is found. Do NOT hardcode "pptx".
     Single session. Do not tell user to start a new conversation.
 
-KEY RULES:
-- Never guess user-providable content
-- Be specific: "Slide 2 needs team photo"
-- Auto-match by content, not filename
-- Warn but don't block
-- Aspect mismatch → present choices immediately
-- Correction → re-display full table
+KEY RULES (same 12 as SKILL.md):
+1. Never guess user-providable content
+2. Be specific: "Slide 2 needs team photo"
+3. Don't over-flag content user already provided
+4. Check project files before flagging
+5. Respect skip decisions — don't re-ask
+6. Auto-match by content, not filename
+7. Warn but don't block
+8. One session from start to finish
+9. Aspect mismatch → present choices immediately, never defer
+10. Correction → re-display full table
+11. Dynamically detect PPTX tools. Do not hardcode "pptx"
+12. Phases can loop back. User changed mind? Jump back to any Phase.
 ```

@@ -190,15 +190,38 @@ def _is_inline_dict(value: str) -> bool:
 
 
 def _parse_inline_dict(value: str) -> dict:
-    """Parse a simple inline dict like 'key1: val1, key2: val2'."""
+    """Parse a simple inline dict. Respects quoted strings when splitting on commas."""
     result = {}
-    # Split by comma, but be careful
-    parts = value.split(", ")
+    parts = _smart_split(value, ",")
     for part in parts:
+        part = part.strip()
         if ":" in part:
             k, v = part.split(":", 1)
             result[k.strip()] = _parse_value(v.strip())
     return result
+
+
+def _smart_split(text: str, sep: str) -> list[str]:
+    """Split by separator, respecting quoted substrings."""
+    parts = []
+    current = ""
+    in_single = False
+    in_double = False
+    for ch in text:
+        if ch == "'" and not in_double:
+            in_single = not in_single
+            current += ch
+        elif ch == '"' and not in_single:
+            in_double = not in_double
+            current += ch
+        elif ch == sep and not in_single and not in_double:
+            parts.append(current)
+            current = ""
+        else:
+            current += ch
+    if current:
+        parts.append(current)
+    return parts
 
 
 def _parse_value(value: str):
@@ -252,8 +275,14 @@ def validate(manifest: dict) -> list[str]:
         if key not in manifest:
             errors.append(f"Missing required top-level key: '{key}'")
 
-    if "manifest_version" in manifest and manifest["manifest_version"] != "1.0":
-        errors.append(f"Unknown manifest_version: '{manifest['manifest_version']}'. Expected '1.0'.")
+    version = manifest.get("manifest_version", "")
+    if version:
+        try:
+            parts = tuple(int(x) for x in str(version).split("."))
+            if parts != (1, 0):
+                errors.append(f"Unsupported manifest_version: '{manifest['manifest_version']}'. Expected '1.0'.")
+        except (ValueError, TypeError):
+            errors.append(f"Invalid manifest_version format: '{manifest['manifest_version']}'. Expected '1.0'.")
 
     # Project
     project = manifest.get("project", {})
@@ -302,6 +331,8 @@ def validate(manifest: dict) -> list[str]:
 
             used_in = mat.get("used_in", [])
             if isinstance(used_in, list):
+                if len(used_in) == 0:
+                    errors.append(f"{prefix}: 'used_in' must contain at least one slide reference.")
                 for j, slide_ref in enumerate(used_in):
                     if not isinstance(slide_ref, str) or not slide_ref.startswith("slide-"):
                         errors.append(f"{prefix}.used_in[{j}]: must be 'slide-N' format, got '{slide_ref}'.")
@@ -357,6 +388,20 @@ def validate(manifest: dict) -> list[str]:
                 reported = summary.get(k)
                 if reported is not None and reported != expected:
                     errors.append(f"summary.{k}: reported {reported}, but materials count is {expected}.")
+
+            # Check slide references don't exceed slide_count
+            max_slide = project.get("slide_count", 0)
+            if max_slide and isinstance(max_slide, int):
+                for i, mat in enumerate(materials):
+                    if isinstance(mat, dict):
+                        for ref in mat.get("used_in", []):
+                            if isinstance(ref, str) and ref.startswith("slide-"):
+                                try:
+                                    n = int(ref.replace("slide-", ""))
+                                    if n > max_slide:
+                                        errors.append(f"materials[{i}].used_in: '{ref}' exceeds project.slide_count ({max_slide}).")
+                                except ValueError:
+                                    pass
 
     return errors
 

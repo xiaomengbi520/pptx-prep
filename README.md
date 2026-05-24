@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Proprietary-red" alt="License"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude%20Code-skill-orange" alt="Claude Code Skill"></a>
   <a href="./README_CN.md"><img src="https://img.shields.io/badge/README-中文版-blue" alt="中文"></a>
 </p>
@@ -147,7 +147,7 @@ pptx-prep/
 
 ## 📄 License
 
-Proprietary. See [LICENSE](LICENSE.txt) for complete terms.
+MIT. See [LICENSE](LICENSE) for complete terms.
 
 ---
 

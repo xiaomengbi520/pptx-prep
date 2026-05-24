@@ -1,6 +1,6 @@
 ---
 name: pptx-prep
-description: "Materials pre-check before any PPTX generation. ALWAYS run this skill FIRST when the user asks to create, generate, or make a presentation, slides, deck, or PPT. Analyzes requirements to identify human-dependent materials — names, photos, logos, data, statistics — that AI cannot invent. Collects all materials upfront or confirms skip decisions, eliminating rework. After completion, hands off directly to the available PPTX generation skill."
+description: "PPTX 材料预检 — 在任何 PPTX 生成之前必须先运行。分析需求，识别人类依赖材料（姓名、照片、Logo、数据），收集材料或确认跳过，消除返工。Materials pre-check before any PPTX generation. ALWAYS run FIRST. Collect names, photos, logos, data upfront."
 ---
 
 # PPTX Material Pre-Check
@@ -86,13 +86,13 @@ Run this skill **before** any PPTX generation. The goal: stop AI from inventing 
 
 ### Phase 4: 内容生成分层
 
-| 层级 | 条件 | 标记 |
-|------|------|------|
-| 🤖 待核实 | AI 能起草但准确性重要（如公司介绍、市场分析） | `source: ai` `confidence: needs-review` |
-| ✅ 可生成 | 通用知识，无需个性化（如 HTTP 原理、通用流程） | `source: ai` `confidence: verified` |
-| ❌ 人类依赖 | 必须用户提供（如团队照、真实营收、Logo） | 进入 Phase 5 |
+按生成能力从易到难分三层：
 
-层级-1（可生成）直接放行。层级-2（待核实）生成但标记审核。层级-3（人类依赖）进入材料收集。
+| 层级 | 图标 | 条件 | 动作 |
+|------|------|------|------|
+| 层级-1 | ✅ | 通用知识，无需个性化（如 HTTP 原理） | 直接放行，标记 `source: ai` `confidence: verified` |
+| 层级-2 | 🤖 | AI 能起草但准确性重要（如公司介绍、市场分析） | 生成初稿，标记 `confidence: needs-review` |
+| 层级-3 | ❌ | 必须用户提供（如团队照、营收数据、Logo） | 进入 Phase 5 收集材料 |
 
 ### Phase 5: 收集材料
 

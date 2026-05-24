@@ -38,7 +38,7 @@ Output format:
 - **Category 5: External References** — URLs, PDFs, templates (CN: 内网/参考文档/模板 EN: url/link/reference/template/wiki)
 
 ### Phase 3: 缺失阈值判断
-If ❌ 需补充 > 50% of total materials → warn user, offer to proceed anyway. If ≤ 50%, continue.
+If no ❌ items (zero human-dependent materials), skip directly to Phase 12 — AI covers everything. If ❌ > 50% → warn user, offer to proceed anyway. If ≤ 50%, continue.
 
 ### Phase 4: 内容生成分层
 - General knowledge → ✅ 可生成 (AI-generated, verified)

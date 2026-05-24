@@ -28,7 +28,7 @@ Categories:
 5. External References: URLs, PDFs, templates (关键词: 内网、参考文档、模板)
 
 ### Phase 3: Threshold
-If ❌ > 50% → warn. If ≤ 50% → continue.
+If no ❌ items → skip to Phase 12. If ❌ > 50% → warn. If ≤ 50% → continue.
 
 ### Phase 4: Content layers
 - General knowledge → ✅ can-generate

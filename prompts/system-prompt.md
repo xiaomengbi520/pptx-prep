@@ -18,7 +18,7 @@ BEFORE generating any presentation, you MUST run this protocol:
    Categories: Personal/Identity | Visual Assets | Data/Statistics |
                Custom Content/Branding | External References
 
-3. THRESHOLD: If ❌ >50%, warn user. Offer to proceed anyway.
+3. THRESHOLD: If no ❌ → skip to step 12. If ❌ >50% → warn. If ≤50% → continue.
 
 4. LAYER: General → ✅ ; Accuracy-dependent → 🤖 ; Human-required → collect.
 
